@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Navidad de Los Saravias</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:
+        radial-gradient(circle at 75% 15%,#315d88 0%,transparent 25%),
+        linear-gradient(to bottom,#020817,#061a35 60%,#0b2c43);
+    color:white;
+}
+
+/* =========================
+   ESTRELLAS DEL CIELO
+========================= */
+
+.cielo{
+    position:fixed;
+    inset:0;
+    z-index:1;
+}
+
+.est{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 8px white;
+    animation:parpadeo 2s infinite alternate;
+}
+
+@keyframes parpadeo{
+    from{opacity:.25}
+    to{opacity:1}
+}
+
+/* =========================
+   LUNA
+========================= */
+
+.luna{
+    position:fixed;
+    right:8%;
+    top:7%;
+
+    width:190px;
+    height:190px;
+
+    border-radius:50%;
+
+    z-index:3;
+
+    background:
+    radial-gradient(
+        circle at 35% 30%,
+        #ffffff,
+        #f7f3d8 45%,
+        #d4d5c5 75%,
+        #aaa
+    );
+
+    box-shadow:
+    0 0 25px white,
+    0 0 70px rgba(210,235,255,.8),
+    0 0 120px rgba(180,215,255,.4);
+}
+
+/* =========================
+   NIEVE
+========================= */
+
+.nieve{
+    position:fixed;
+    inset:0;
+    z-index:40;
+    pointer-events:none;
+}
+
+.copo{
+    position:absolute;
+    top:-30px;
+    color:white;
+    text-shadow:0 0 8px white;
+    animation:nevar linear infinite;
+}
+
+@keyframes nevar{
+
+    0%{
+        transform:translateY(-30px) translateX(0);
+    }
+
+    50%{
+        transform:translateY(50vh) translateX(35px);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-25px);
+    }
+
+}
+
+/* =========================
+   MONTAÑAS
+========================= */
+
+.montanas{
+    position:fixed;
+    bottom:85px;
+    left:0;
+
+    width:100%;
+    height:270px;
+
+    z-index:4;
+
+    background:
+    linear-gradient(
+        135deg,
+        transparent 49%,
+        #102d49 50%
+    ) 0 0/430px 270px,
+
+    linear-gradient(
+        45deg,
+        transparent 49%,
+        #0b2741 50%
+    ) 180px 0/430px 270px;
+}
+
+/* =========================
+   PINOS
+========================= */
+
+.pinos{
+    position:fixed;
+    bottom:50px;
+    left:0;
+
+    width:100%;
+    height:250px;
+
+    z-index:6;
+}
+
+.pino{
+    position:absolute;
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-left:48px solid transparent;
+    border-right:48px solid transparent;
+    border-bottom:175px solid #075238;
+
+    filter:drop-shadow(0 8px 5px rgba(0,0,0,.45));
+}
+
+.pino:before{
+    content:"";
+    position:absolute;
+
+    left:-39px;
+    top:55px;
+
+    border-left:39px solid transparent;
+    border-right:39px solid transparent;
+    border-bottom:120px solid #0b6846;
+}
+
+.pino:after{
+    content:"";
+    position:absolute;
+
+    left:-30px;
+    top:95px;
+
+    border-left:30px solid transparent;
+    border-right:30px solid transparent;
+    border-bottom:90px solid #08704a;
+}
+
+.pino:nth-child(1){
+    left:2%;
+    transform:scale(1.2);
+}
+
+.pino:nth-child(2){
+    left:13%;
+    transform:scale(.8);
+}
+
+.pino:nth-child(3){
+    left:25%;
+    transform:scale(1.35);
+}
+
+.pino:nth-child(4){
+    right:22%;
+    transform:scale(.8);
+}
+
+.pino:nth-child(5){
+    right:9%;
+    transform:scale(1.3);
+}
+
+.pino:nth-child(6){
+    right:0;
+    transform:scale(.9);
+}
+
+.nieve-pino{
+    position:absolute;
+
+    left:-42px;
+    top:40px;
+
+    width:84px;
+    height:15px;
+
+    background:white;
+    border-radius:50%;
+}
+
+/* =========================
+   SUELO
+========================= */
+
+.suelo{
+    position:fixed;
+    bottom:0;
+    left:0;
+
+    width:100%;
+    height:100px;
+
+    z-index:7;
+
+    background:linear-gradient(#fff,#dcecf5);
+
+    border-radius:50% 50% 0 0/25px 25px 0 0;
+
+    box-shadow:0 -10px 35px rgba(255,255,255,.35);
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.contenedor{
+    position:relative;
+    z-index:15;
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding-top:32px;
+}
+
+.titulo{
+    margin:0;
+
+    text-align:center;
+
+    font-size:32px;
+    line-height:1.2;
+
+    color:white;
+
+    text-shadow:
+    0 2px 6px #000,
+    0 0 15px rgba(255,255,255,.7);
+}
+
+.subtitulo{
+    margin-top:8px;
+
+    font-size:18px;
+
+    color:#ffe49a;
+
+    text-shadow:0 2px 4px #000;
+}
+
+/* =========================
+   ZONA CENTRAL
+========================= */
+
+.zona{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:45px;
+
+    margin-top:23px;
+}
+
+/* =========================
+   CALENDARIO
+========================= */
+
+.calendario{
+    width:215px;
+    height:255px;
+
+    padding-top:15px;
+
+    text-align:center;
+
+    background:
+    linear-gradient(145deg,#b30c1d,#e12435);
+
+    border:7px solid #087044;
+
+    border-radius:18px;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.55),
+    0 0 25px rgba(255,255,255,.25);
+}
+
+.calendario h2{
+    margin:0;
+
+    font-size:22px;
+
+    text-shadow:0 2px 3px #550000;
+}
+
+.adornos{
+    margin:6px;
+
+    color:#ffd75a;
+
+    font-size:18px;
+}
+
+.numero{
+    font-size:96px;
+    line-height:96px;
+
+    font-weight:bold;
+
+    text-shadow:
+    4px 4px 0 #087044,
+    0 0 12px white;
+}
+
+.falta{
+    font-size:17px;
+    font-weight:bold;
+}
+
+/* =========================
+   FOTO
+========================= */
+
+.foto{
+    width:330px;
+    height:235px;
+
+    padding:9px;
+
+    background:white;
+
+    border:4px solid #d9edf9;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.5),
+    0 0 25px rgba(255,255,255,.45);
+
+    overflow:hidden;
+}
+
+.foto img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    display:block;
+
+    border-radius:13px;
+}
+
+/* =========================
+   FRASE
+========================= */
+
+.frase{
+    margin-top:18px;
+
+    text-align:center;
+
+    font-size:23px;
+
+    line-height:1.3;
+
+    color:white;
+
+    text-shadow:
+    0 2px 6px #000,
+    0 0 10px rgba(255,255,255,.5);
+}
+
+.firma{
+    display:block;
+
+    margin-top:5px;
+
+    font-family:"Brush Script MT",cursive;
+
+    font-size:39px;
+
+    color:#ffd75a;
+
+    text-shadow:
+    0 0 8px white,
+    0 0 15px #d29e20;
+}
+
+/* ==================================================
+   TRINEO
+================================================== */
+
+.trineo{
+
+    position:fixed;
+
+    z-index:35;
+
+    width:420px;
+
+    left:-500px;
+    top:70vh;
+
+    pointer-events:none;
+
+    will-change:transform,left,top;
+
+}
+
+/* imagen */
+
+.trineo img{
+
+    width:100%;
+    height:auto;
+
+    display:block;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,255,255,.9))
+    drop-shadow(0 5px 10px rgba(0,0,0,.5));
+}
+
+/* ==================================================
+   CHISPAS
+================================================== */
+
+.chispas{
+    position:fixed;
+    inset:0;
+
+    z-index:34;
+
+    pointer-events:none;
+}
+
+.chispa{
+
+    position:absolute;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+    0 0 6px white,
+    0 0 14px #ffe36b;
+
+    opacity:0;
+
+    animation:desaparecer 1.3s ease-out forwards;
+}
+
+@keyframes desaparecer{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(.1) translateY(25px);
+    }
+
+}
+
+/* ==================================================
+   CAMPANITAS
+================================================== */
+
+.campana{
+
+    position:fixed;
+
+    z-index:36;
+
+    font-size:25px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    animation:campanear 1.5s ease-out forwards;
+
+    filter:
+    drop-shadow(0 0 8px #ffd75a);
+}
+
+@keyframes campanear{
+
+    0%{
+        opacity:0;
+        transform:scale(.5) rotate(-20deg);
+    }
+
+    30%{
+        opacity:1;
+        transform:scale(1.2) rotate(20deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(.8) translateY(-25px);
+    }
+
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media(max-width:800px){
+
+    .titulo{
+        font-size:23px;
+    }
+
+    .zona{
+        gap:15px;
+        transform:scale(.78);
+    }
+
+    .trineo{
+        width:300px;
+    }
+
+    .luna{
+        width:130px;
+        height:130px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     ESTRELLAS
+========================= -->
+
+<div class="cielo">
+
+<span class="est" style="left:7%;top:12%"></span>
+<span class="est" style="left:17%;top:23%"></span>
+<span class="est" style="left:28%;top:9%"></span>
+<span class="est" style="left:39%;top:18%"></span>
+<span class="est" style="left:52%;top:7%"></span>
+<span class="est" style="left:65%;top:27%"></span>
+<span class="est" style="left:78%;top:6%"></span>
+<span class="est" style="left:91%;top:31%"></span>
+
+</div>
+
+
+<!-- LUNA -->
+
+<div class="luna"></div>
+
+
+<!-- NIEVE -->
+
+<div class="nieve">
+
+<span class="copo" style="left:5%;font-size:18px;animation-duration:9s">❄</span>
+<span class="copo" style="left:14%;font-size:13px;animation-duration:12s">❄</span>
+<span class="copo" style="left:23%;font-size:21px;animation-duration:10s">❄</span>
+<span class="copo" style="left:32%;font-size:15px;animation-duration:13s">❄</span>
+<span class="copo" style="left:41%;font-size:20px;animation-duration:11s">❄</span>
+<span class="copo" style="left:51%;font-size:14px;animation-duration:8s">❄</span>
+<span class="copo" style="left:61%;font-size:22px;animation-duration:12s">❄</span>
+<span class="copo" style="left:71%;font-size:16px;animation-duration:10s">❄</span>
+<span class="copo" style="left:82%;font-size:20px;animation-duration:13s">❄</span>
+<span class="copo" style="left:92%;font-size:14px;animation-duration:9s">❄</span>
+
+</div>
+
+
+<!-- MONTAÑAS -->
+
+<div class="montanas"></div>
+
+
+<!-- PINOS -->
+
+<div class="pinos">
+
+<div class="pino"><div class="nieve-pino"></div></div>
+<div class="pino"><div class="nieve-pino"></div></div>
+<div class="pino"><div class="nieve-pino"></div></div>
+<div class="pino"><div class="nieve-pino"></div></div>
+<div class="pino"><div class="nieve-pino"></div></div>
+<div class="pino"><div class="nieve-pino"></div></div>
+
+</div>
+
+
+<!-- SUELO -->
+
+<div class="suelo"></div>
+
+
+<!-- ==================================================
+     PAPÁ NOEL + RENOS
+================================================== -->
+
+<div class="trineo" id="trineo">
+
+<img
+src="https://thumbs.wbm.im/pw/medium/fc045c3d1d27894975034aced3ccfb43.png"
+alt="Papá Noel y renos">
+
+</div>
+
+
+<!-- CHISPAS -->
+
+<div class="chispas" id="chispas"></div>
+
+
+<!-- CONTENIDO -->
+
+<div class="contenedor">
+
+<h1 class="titulo">
+
+Te espero con ansias,<br>
+Navidad del Niño Jesús,<br>
+para pasarla con mi familia...
+
+</h1>
+
+
+<div class="subtitulo">
+
+✨ Una cuenta regresiva muy especial ✨
+
+</div>
+
+
+<div class="zona">
+
+<div class="calendario">
+
+<h2>🎄 NAVIDAD 🎄</h2>
+
+<div class="adornos">
+★ ✦ ★
+</div>
+
+<div class="numero" id="numero">
+0
+</div>
+
+<div class="falta">
+DÍAS
+</div>
+
+</div>
+
+
+<div class="foto">
+
+<img
+src="IMAGEN1.jfif"
+alt="Familia">
+
+</div>
+
+</div>
+
+
+<div class="frase">
+
+Que la magia de la Navidad<br>
+llene nuestro hogar de amor,
+
+<span class="firma">
+
+Los Saravias ❤️
+
+</span>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   CUENTA REGRESIVA
+========================================== */
+
+function actualizar(){
+
+    const navidad =
+        new Date("2026-12-25T00:00:00");
+
+    const ahora =
+        new Date();
+
+    const diferencia =
+        navidad.getTime() -
+        ahora.getTime();
+
+    let dias =
+        Math.ceil(
+            diferencia /
+            (1000*60*60*24)
+        );
+
+    if(dias < 0){
+        dias=0;
+    }
+
+    document.getElementById("numero")
+        .textContent=dias;
+
+}
+
+actualizar();
+
+setInterval(actualizar,60000);
+
+
+/* ==========================================
+   VUELO MÁGICO
+========================================== */
+
+const trineo =
+    document.getElementById("trineo");
+
+const contenedorChispas =
+    document.getElementById("chispas");
+
+let inicio=null;
+
+const duracion=15000;
+
+
+/* posiciones de la trayectoria */
+
+const puntos=[
+
+    {x:-500,y:75,r:-12,s:.70},
+
+    {x:0,y:62,r:-15,s:.78},
+
+    {x:16,y:42,r:-20,s:.86},
+
+    {x:30,y:20,r:-12,s:.94},
+
+    {x:45,y:8,r:2,s:1},
+
+    {x:59,y:5,r:10,s:1.02},
+
+    {x:70,y:13,r:16,s:.94},
+
+    {x:77,y:25,r:8,s:.84},
+
+    {x:81,y:12,r:-4,s:.72},
+
+    {x:105,y:0,r:-12,s:.55}
+
+];
+
+
+/* interpolación */
+
+function interpolar(a,b,t){
+
+    return a+(b-a)*t;
+
+}
+
+
+/* movimiento */
+
+function animar(tiempo){
+
+    if(!inicio){
+        inicio=tiempo;
+    }
+
+    let progreso =
+        (tiempo-inicio)/duracion;
+
+    if(progreso>=1){
+
+        inicio=tiempo;
+
+        progreso=0;
+
+    }
+
+
+    /*
+       aceleración suave:
+       lento al principio,
+       rápido en el centro,
+       suave al llegar a la luna
+    */
+
+    const curva =
+        progreso<.5
+        ? 2*progreso*progreso
+        : 1-Math.pow(-2*progreso+2,2)/2;
+
+
+    const posicion =
+        curva*(puntos.length-1);
+
+    const indice =
+        Math.floor(posicion);
+
+    const siguiente =
+        Math.min(indice+1,puntos.length-1);
+
+    const t =
+        posicion-indice;
+
+
+    const p1=puntos[indice];
+
+    const p2=puntos[siguiente];
+
+
+    const x =
+        interpolar(p1.x,p2.x,t);
+
+    const y =
+        interpolar(p1.y,p2.y,t);
+
+    const rot =
+        interpolar(p1.r,p2.r,t);
+
+    const escala =
+        interpolar(p1.s,p2.s,t);
+
+
+    /*
+       movimiento de balanceo
+       para que no parezca un objeto pegado
+    */
+
+    const balanceo =
+        Math.sin(tiempo/350)*3;
+
+
+    trineo.style.left=x+"vw";
+
+    trineo.style.top=y+"vh";
+
+    trineo.style.transform=
+        "rotate("+(rot+balanceo)+"deg) scale("+escala+")";
+
+
+    /*
+       crear chispas detrás
+    */
+
+    if(Math.random()<.22){
+
+        crearChispa(
+            parseFloat(trineo.style.left),
+            parseFloat(trineo.style.top)
+        );
+
+    }
+
+
+    /*
+       campanita ocasional
+    */
+
+    if(Math.random()<.006){
+
+        crearCampana(
+            parseFloat(trineo.style.left),
+            parseFloat(trineo.style.top)
+        );
+
+    }
+
+
+    requestAnimationFrame(animar);
+
+}
+
+requestAnimationFrame(animar);
+
+
+/* ==========================================
+   CHISPAS
+========================================== */
+
+function crearChispa(x,y){
+
+    const chispa =
+        document.createElement("span");
+
+    chispa.className="chispa";
+
+    const variacionX =
+        (Math.random()*120)-60;
+
+    const variacionY =
+        (Math.random()*70)-35;
+
+
+    chispa.style.left=
+        "calc("+x+"vw + "+variacionX+"px)";
+
+    chispa.style.top=
+        "calc("+y+"vh + "+variacionY+"px)";
+
+
+    chispa.style.width=
+        (3+Math.random()*6)+"px";
+
+    chispa.style.height=
+        chispa.style.width;
+
+
+    contenedorChispas.appendChild(chispa);
+
+
+    setTimeout(
+        ()=>chispa.remove(),
+        1400
+    );
+
+}
+
+
+/* ==========================================
+   CAMPANITAS
+========================================== */
+
+function crearCampana(x,y){
+
+    const campana =
+        document.createElement("span");
+
+    campana.className="campana";
+
+    campana.textContent="🔔";
+
+    campana.style.left=
+        "calc("+x+"vw + "+(Math.random()*80-40)+"px)";
+
+    campana.style.top=
+        "calc("+y+"vh + "+(Math.random()*60-30)+"px)";
+
+
+    document.body.appendChild(campana);
+
+
+    setTimeout(
+        ()=>campana.remove(),
+        1500
+    );
+
+}
+
+</script>
+
+</body>
+</html>
